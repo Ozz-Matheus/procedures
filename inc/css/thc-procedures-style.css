@@ -1,0 +1,150 @@
+/*====================*/
+/* Plugin PHO Trámites Local */
+/*====================*/
+/*====================*/
+/* Alert */
+.alert{
+	border-radius: 4px !important;
+}
+/*====================*/
+/*====================*/
+/* Alert success */
+.alert-success{
+    color: #0a3622;
+	background-color: #d1e7dd;
+}
+/*====================*/
+/*====================*/
+/* Alert error */
+.alert-error{
+    color: #58151c;
+	background-color: #f8d7da;
+}
+/*====================*/
+/*====================*/
+/* Alert Required */
+label.required:after {
+  content:" * ";
+  color:red;
+}
+/*====================*/
+/*====================*/
+/* Border bottom */
+.underline{
+	border-bottom: 1px solid black;
+}
+/*====================*/
+/*====================*/
+/* Margin top small */
+.margin-top-20{
+    margin-top: 20px;
+}
+/*====================*/
+/*====================*/
+/* Margin top big */
+.margin-top-40{
+    margin-top: 40px;
+}
+/*====================*/
+
+/*====================*/
+/* Margin bottom small */
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
+/*====================*/
+/*====================*/
+/* Margin bottom big */
+.margin-bottom-40{
+	margin-bottom: 40px;
+}
+/*====================*/
+/*====================*/
+/* Margin left small */
+.margin-left-20{
+    margin-left: 20px;
+}
+/*====================*/
+/*====================*/
+/* Margin left big */
+.margin-left-40{
+    margin-left: 40px;
+}
+/*====================*/
+/*====================*/
+/* Margin right small */
+.margin-right-20{
+    margin-right: 20px;
+}
+/*====================*/
+/*====================*/
+/* Margin right big */
+.margin-right-40{
+    margin-right: 40px;
+}
+/*====================*/
+/*====================*/
+/* Image small */
+.img-small{
+    max-width: 100px !important;
+}
+/*====================*/
+/*====================*/
+/* Display Flex */
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: calc(1.5rem / 2);
+    padding-left: calc(1.5rem / 2);
+    margin-right: calc(1.5rem / -2);
+    margin-left: calc(1.5rem / -2);
+}
+.p-l{
+    padding-left: 20px;
+}
+.p-r{
+    padding-right: 20px;
+}
+.col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+@media (min-width: 768px){
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+
+/*====================*/
+/*====================*/
+/* Colors */
+.inactive{
+    color: red;
+}
+.red{
+    color: #ea1e63;
+}
+.orange{
+    color: #f24336;
+}
+.yellow{
+    color: #fa9500;
+}
+.blue-dark{
+    color: #3f51b5;
+}
+.blue{
+    color: #2194f1;
+}
+.green{
+    color: #4daf50;
+}
+/*====================*/
+
+
+
