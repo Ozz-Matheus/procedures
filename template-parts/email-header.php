@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
 													<tr>
 														<td align="center" id="header_wrapper">
-															<h1>Club de Thulio A.C.</h1>
+															<h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
 														</td>
 													</tr>
 												</table>

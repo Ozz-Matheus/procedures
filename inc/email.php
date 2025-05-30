@@ -23,7 +23,7 @@ function pho_send_email_notification() {
         $email = sanitize_email($_POST['user_email']);
         $email_state = sanitize_text_field($_POST['procedure_status']);
 
-        if ($email_state === 'Ya eres asociado de Club de Thulio A.C. en Libro de Asociados') {
+        if ($email_state === 'member') {
             $user = get_user_by('email', $email);
             if ($user && !in_array('club_member', (array) $user->roles)) {
                 $user->add_role('club_member');

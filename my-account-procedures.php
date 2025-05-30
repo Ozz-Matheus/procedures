@@ -10,6 +10,6 @@ $procedures = new WP_Query($args);
 // Mostrar los Trámites
 if ($procedures->have_posts()) {
 
-    require_once dirname( __FILE__ ) . '/template-parts/content.php';
+    require_once dirname( __FILE__ ) . '/template-parts/content-procedure.php';
 
 }

@@ -32,5 +32,7 @@ function pho_tramites_init_plugin() {
     require_once $inc_path . 'metaboxes.php';
     require_once $inc_path . 'notifications.php';
     require_once $inc_path . 'redirects.php';
+    require_once $inc_path . 'admin-statuses.php';
     require_once $inc_path . 'template-helpers.php';
+
 }

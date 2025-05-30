@@ -33,17 +33,8 @@ function pho_fields_procedure() {
         'id' => 'Status',
         'type' => 'select',
         'show_option_none' => true,
-        'options' => array(
-            'Solicitud de permiso ante Cofepris' => __('Solicitud de permiso ante Cofepris', 'cmb2'),
-            'En espera de Respuesta de Cofepris' => __('En espera de Respuesta de Cofepris', 'cmb2'),
-            'Presentación de demanda de amparo' => __('Presentación de demanda de amparo', 'cmb2'),
-            'En espera de aprobación del Club' => __('En espera de aprobación del Club', 'cmb2'),
-            'En espera de sentencia' => __('En espera de sentencia', 'cmb2'),
-            'Resultado Final' => __('Resultado Final', 'cmb2'),
-            'Solicitud incompleta' => __('Solicitud incompleta', 'cmb2'),
-            'En proceso de afiliación a nuestra AC' => __('En proceso de afiliación a nuestra AC', 'cmb2'),
-            'Ya eres asociado de Club de Thulio A.C. en Libro de Asociados' => __('Ya eres asociado de Club de Thulio A.C. en Libro de Asociados', 'cmb2'),
-        ),
+        'options_cb' => 'pho_get_status_options_for_cmb2',
+
     ));
 
     $fields = [
@@ -98,4 +89,18 @@ function pho_fields_procedure() {
         'type' => 'title',
         'classes' => 'pho-send-notification',
     ));
+}
+
+
+function pho_get_status_options_for_cmb2() {
+    if (!function_exists('pho_get_all_statuses')) return [];
+
+    $statuses = pho_get_all_statuses();
+    $options = [];
+
+    foreach ($statuses as $slug => $data) {
+        $options[$slug] = $data['label'];
+    }
+
+    return $options;
 }

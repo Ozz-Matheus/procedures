@@ -7,6 +7,10 @@
     while ($procedures->have_posts()) {
         $procedures->the_post();
 
+        $status_slug = get_post_meta(get_the_ID(), 'Status', true);
+        $status_label = pho_get_all_statuses()[$status_slug]['label'] ?? ucfirst($status_slug);
+
+
 ?> 
 
 <div class="margin-top-40 margin-bottom-40">
@@ -15,8 +19,8 @@
 
 <div class="box row margin-bottom-40 underline">
     <div class="col-12 col-md-4">
-        <h3><?php show_status_procedure(get_post_meta(get_the_ID(), 'Status', true)); ?> | Estado</h3>
-        <p><?php esc_html_e(get_post_meta(get_the_ID(), 'Status', true)); ?></p>
+        <h3><?php show_status_procedure($status_slug); ?> | Estado</h3>
+        <p><?php echo esc_html($status_label); ?></p>
     </div>
     <div class="col-12 col-md-4">
         <h3>Correo Electrónico</h3>
@@ -51,6 +55,7 @@ $procedure_id = get_the_ID(); // función para obtener el ID del Trámite del us
 
 // Agrega procedure al nombre de los archivos subidos
 function agregar_prefijo_procedure($archivo, $prefijo = 'procedure-') {
+
     if (!empty($archivo['tmp_name'])) {
         // Obtener el nombre original del archivo
         $nombre_original = basename($archivo['name']);
@@ -110,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_procedure'])) {
 
     $status = get_post_meta(get_the_ID(), 'Status', true);
 
-    if ($status == 'Solicitud incompleta') {
-        $status = "En espera de aprobación del Club";
+    if ($status == 'incomplete') {
+        $status = "pending";
     }
 
     update_post_meta($procedure_id, 'Names', $nombres);
@@ -267,30 +272,18 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
         </script>
     </div>
 <?php endif; ?>
-<?php if(get_post_meta(get_the_ID(), 'Status', true) == 'Ya eres asociado de Club de Thulio A.C. en Libro de Asociados'): ?>
-    <div class="wpb_column vc_column_container vc_col-sm-12 margin-top-40">
-        <div class="wpb_column vc_column_container vc_col-sm-8 margin-bottom-40">
-            <div class="margin-top-40">
-                <h3 class="h4">Manual de cumplimiento y normas del club cannábico</h3>
-            </div>
-            <div class="margin-top-20 margin-bottom-40">
-                <a class="button" download href="<?php echo esc_url(plugin_dir_url( __FILE__ ) . '../inc/acta/manual_de_cumplimiento_y_normas_del_club_cannabico.pdf'); ?>">
-                    Descargar PDF
-                </a>
-            </div>
-        </div>
-        <div class="wpb_column vc_column_container vc_col-sm-4 margin-bottom-40">
-            <div class="margin-top-40">
-                <h3 class="h4">Participa en nuestro grupo de :</h3>
-            </div>
-            <div class="margin-top-20 margin-bottom-40">
-                <a class="button" download href="https://chat.whatsapp.com/Esgb4L5rus33n1yfWXCWKZ">
-                    WhatsApp  <i class="fab fa-whatsapp"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-<?php endif; ?>
+<?php
+
+    if(get_post_meta(get_the_ID(), 'Status', true) == 'member'):
+
+        $templateFooter = plugin_dir_path(__FILE__) . '../template-parts/extra/content-footer.php';
+
+        if (file_exists($templateFooter)) {
+            require_once $templateFooter;
+        }
+
+    endif;
+?>
 
 <?php
     } wp_reset_postdata();
