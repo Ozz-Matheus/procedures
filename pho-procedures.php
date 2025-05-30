@@ -28,3 +28,7 @@ function pho_tramites_init_plugin() {
     require_once $inc_path . 'template-helpers.php';
 }
 add_action('plugins_loaded', 'pho_tramites_init_plugin');
+
+// Hook de activación (debe ir aquí porque todas las funciones ya están disponibles)
+register_activation_hook(__FILE__, 'pho_plugin_activate');
+

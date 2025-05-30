@@ -9,7 +9,7 @@ function pho_add_new_tramites() {
     ));
 
     if (empty($procedure)) {
-        $template = plugin_dir_path(__FILE__) . '../template-parts/extra/content-thulio.php';
+        $template = plugin_dir_path(__FILE__) . '../template-parts/extra/content-header.php';
         if (file_exists($template)) {
             require_once $template;
         }

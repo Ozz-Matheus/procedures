@@ -9,4 +9,3 @@ function pho_plugin_activate() {
     // Asegurar roles y capacidades personalizados
     pho_add_custom_capabilities_for_non_admins();
 }
-register_activation_hook(__FILE__, 'pho_plugin_activate');
