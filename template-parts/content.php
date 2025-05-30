@@ -79,31 +79,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_procedure'])) {
     // Manejo de archivos utilizando la nueva función
 
     // Archivo INE Frente
-    $upload_ine_frente = agregar_prefijo_procedure($_FILES['ine_file_front']);
+    $upload_ine_frente = isset($_FILES['ine_file_front']) ? agregar_prefijo_procedure($_FILES['ine_file_front']) : false;
     if (!empty($upload_ine_frente['url'])) {
         update_post_meta($procedure_id, 'Ine_file_front', $upload_ine_frente['url']);
     }
 
     // Archivo INE Respaldo
-    $upload_ine_respaldo = agregar_prefijo_procedure($_FILES['ine_file_back']);
+    $upload_ine_respaldo = isset($_FILES['ine_file_back']) ? agregar_prefijo_procedure($_FILES['ine_file_back']) : false;
     if (!empty($upload_ine_respaldo['url'])) {
         update_post_meta($procedure_id, 'Ine_file_back', $upload_ine_respaldo['url']);
     }
 
     // Archivo CURP
-    $upload_curp_archivo = agregar_prefijo_procedure($_FILES['curp_file']);
+    $upload_curp_archivo = isset($_FILES['curp_file']) ? agregar_prefijo_procedure($_FILES['curp_file']) : false;
     if (!empty($upload_curp_archivo['url'])) {
         update_post_meta($procedure_id, 'Curp_file', $upload_curp_archivo['url']);
     }
 
     // Archivo RFC
-    $upload_rfc_archivo = agregar_prefijo_procedure($_FILES['rfc_file']);
+    $upload_rfc_archivo = isset($_FILES['rfc_file']) ? agregar_prefijo_procedure($_FILES['rfc_file']) : false;
     if (!empty($upload_rfc_archivo['url'])) {
         update_post_meta($procedure_id, 'Rfc_file', $upload_rfc_archivo['url']);
     }
 
     // Archivo de Autorización
-    $upload_autorizacion_archivo = agregar_prefijo_procedure($_FILES['autorizacion']);
+    $upload_autorizacion_archivo = isset($_FILES['autorizacion']) ? agregar_prefijo_procedure($_FILES['autorizacion']) : false;
     if (!empty($upload_autorizacion_archivo['url'])) {
         update_post_meta($procedure_id, 'Authorization', $upload_autorizacion_archivo['url']);
     }
