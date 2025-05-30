@@ -8,18 +8,25 @@
  * Author URI: https://phoenixdev.mx/
  */
 
-// Verificar si WooCommerce está activo
-function pho_tramites_init_plugin() {
-    if ( ! class_exists( 'WooCommerce' ) ) return;
+// Cargar módulos requeridos por el hook de activación
+$inc_path = plugin_dir_path(__FILE__) . 'inc/';
+require_once $inc_path . 'capabilities.php';
+require_once $inc_path . 'cpt-procedures.php';
+require_once $inc_path . 'endpoints.php';
+require_once $inc_path . 'activator.php';
 
-    // Cargar archivos del plugin
-    $inc_path = plugin_dir_path( __FILE__ ) . 'inc/';
+// Hook de activación
+register_activation_hook(__FILE__, 'pho_plugin_activate');
+
+// Cargar el plugin solo si WooCommerce está activo
+add_action('plugins_loaded', 'pho_tramites_init_plugin');
+function pho_tramites_init_plugin() {
+    if ( ! class_exists('WooCommerce') ) return;
+
+    $inc_path = plugin_dir_path(__FILE__) . 'inc/';
+
     require_once $inc_path . 'assets.php';
     require_once $inc_path . 'cmb2-loader.php';
-    require_once $inc_path . 'activator.php';
-    require_once $inc_path . 'capabilities.php';
-    require_once $inc_path . 'cpt-procedures.php';
-    require_once $inc_path . 'endpoints.php';
     require_once $inc_path . 'forms.php';
     require_once $inc_path . 'email.php';
     require_once $inc_path . 'metaboxes.php';
@@ -27,8 +34,3 @@ function pho_tramites_init_plugin() {
     require_once $inc_path . 'redirects.php';
     require_once $inc_path . 'template-helpers.php';
 }
-add_action('plugins_loaded', 'pho_tramites_init_plugin');
-
-// Hook de activación (debe ir aquí porque todas las funciones ya están disponibles)
-register_activation_hook(__FILE__, 'pho_plugin_activate');
-
