@@ -8,7 +8,8 @@ jQuery(document).ready(function ($) {
             data: {
                 action: 'pho_send_email_notification',
                 user_email: phoNotificationData.user_email,
-                procedure_status: phoNotificationData.procedure_status,
+                procedure_status: phoNotificationData.procedure_status_slug,
+                procedure_status_label: phoNotificationData.procedure_status_label,
                 procedure_observations: phoNotificationData.procedure_observations
             },
             success: function (response) {
