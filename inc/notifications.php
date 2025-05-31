@@ -7,7 +7,7 @@ function pho_enqueue_admin_notification_script($hook) {
     if ($hook === 'post.php' && isset($post) && $post->post_type === 'procedures') {
 
         $procedure_status_slug = get_post_meta($post->ID, 'Status', true);
-        $procedure_status_label = pho_get_all_statuses()[$status_slug]['label'] ?? ucfirst($status_slug);
+        $procedure_status_label = pho_get_all_statuses()[$procedure_status_slug]['label'] ?? ucfirst($procedure_status_slug);
 
         wp_enqueue_script(
             'pho-admin-notification',
