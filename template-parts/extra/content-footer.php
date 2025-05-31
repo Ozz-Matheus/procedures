@@ -4,7 +4,7 @@
                 <h3 class="h4">Manual de cumplimiento y normas del club cannábico</h3>
             </div>
             <div class="margin-top-20 margin-bottom-40">
-                <a class="button" download href="<?php echo esc_url(plugin_dir_url( __FILE__ ) . '../inc/acta/manual_de_cumplimiento_y_normas_del_club_cannabico.pdf'); ?>">
+                <a class="button" download href="<?php echo esc_url(plugin_dir_url( __FILE__ ) . '../inc/acta/manual_de_cumplimiento.pdf'); ?>">
                     Descargar PDF
                 </a>
             </div>
