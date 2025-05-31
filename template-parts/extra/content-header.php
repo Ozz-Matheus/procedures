@@ -1,4 +1,4 @@
-                    <!-- tutorial -->
+                    <!-- Tutorial Thulio -->
                     <div id="tutorial"
                         class="vc_row wpb_row vc_row-fluid image-with-text vc_column-gap-default vc_row-o-equal-height vc_row-o-content-middle vc_row-flex ts-row-wide">
                         <div class="wpb_column vc_column_container vc_col-sm-6 vc_custom_1664937069006">
@@ -68,4 +68,4 @@
                             </div>
                         </div>
                     </div>
-                     <!-- tutorial -->
+                     <!-- Tutorial Thulio -->

@@ -1,10 +1,10 @@
     <div class="wpb_column vc_column_container vc_col-sm-12 margin-top-40">
         <div class="wpb_column vc_column_container vc_col-sm-8 margin-bottom-40">
             <div class="margin-top-40">
-                <h3 class="h4">Manual de cumplimiento y normas del club cannábico</h3>
+                <h3 class="h4">Manual de cumplimiento y normas de : <?php echo esc_html(get_bloginfo('name')); ?></h3>
             </div>
             <div class="margin-top-20 margin-bottom-40">
-                <a class="button" download href="<?php echo esc_url(plugin_dir_url( __FILE__ ) . '../inc/acta/manual_de_cumplimiento.pdf'); ?>">
+                <a class="button" download href="<?php echo esc_url(plugin_dir_url( __FILE__ ) . '../../assets/acta/manual_de_cumplimiento.pdf'); ?>">
                     Descargar PDF
                 </a>
             </div>
