@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: PHO Trámites
- * Description: Trámites es un complemento que agrega funciones de trámite a la vista de usuario.
+ * Plugin Name: PHO Procedures
+ * Description: PHO Procedures es un plugin para WordPress que permite a los usuarios gestionar solicitudes personalizadas tipo “trámite” desde su cuenta WooCommerce.
  * Version: 1.4
- * Author: Orlando Montesinos Quintana
+ * Author: Phoenix Dev
  * Text Domain: pho-procedures
  * Author URI: https://phoenixdev.mx/
  */

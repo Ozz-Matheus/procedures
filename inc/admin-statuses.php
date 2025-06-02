@@ -11,7 +11,7 @@ function pho_add_status_menu() {
         'pho_procedure_statuses',
         'pho_render_statuses_page',
         'dashicons-feedback',
-        21
+        22
     );
 }
 
@@ -64,7 +64,7 @@ function pho_render_statuses_page() {
     $statuses = pho_get_all_statuses();
     ?>
     <div class="wrap">
-        <h1>Estados de los Trámite</h1>
+        <h1>Estado del Trámite</h1>
         <form method="post">
             <?php wp_nonce_field('pho_save_statuses'); ?>
 
