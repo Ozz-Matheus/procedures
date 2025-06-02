@@ -1,4 +1,3 @@
- 
 <div class="margin-bottom-40 underline">
     <h1 class="margin-bottom-40">Trámites</h1>
 </div>
@@ -10,7 +9,13 @@
         $status_slug = get_post_meta(get_the_ID(), 'Status', true);
         $status_label = pho_get_all_statuses()[$status_slug]['label'] ?? ucfirst($status_slug);
 
+        // Migración silenciosa
+        if ($status_slug !== 'member' && $status_slug === 'Ya eres asociado de Club de Thulio A.C. en Libro de Asociados') {
+            update_post_meta(get_the_ID(), 'Status', 'member');
+            $status_slug = 'member';
+        }
 
+        $status_label = pho_get_all_statuses()[$status_slug]['label'] ?? ucfirst($status_slug);
 ?> 
 
 <div class="margin-top-40 margin-bottom-40">
@@ -284,7 +289,6 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
 
     endif;
 ?>
-
 <?php
     } wp_reset_postdata();
 ?>

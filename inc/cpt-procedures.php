@@ -29,11 +29,19 @@ function pho_add_procedure_status_column($columns) {
 add_filter('manage_procedures_posts_columns', 'pho_add_procedure_status_column');
 
 function pho_display_procedure_status_column($column, $post_id) {
+
     if ($column === 'procedure_name') {
+
         echo esc_html(get_post_meta($post_id, 'Names', true));
     }
+
     if ($column === 'procedure_status') {
-        echo esc_html(get_post_meta($post_id, 'Status', true));
+
+        $slug = get_post_meta($post_id, 'Status', true);
+        $statuses = pho_get_all_statuses();
+        $label = isset($statuses[$slug]) ? $statuses[$slug]['label'] : ucfirst($slug);
+
+        echo esc_html($label);
     }
 }
 add_action('manage_procedures_posts_custom_column', 'pho_display_procedure_status_column', 10, 2);
