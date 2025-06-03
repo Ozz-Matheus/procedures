@@ -15,7 +15,7 @@ $member_number = pho_get_member_number_from_phone($user_id, $phone);
 $fecha_afiliacion = pho_get_affiliation_date($procedure_id);
 
 ?>
-<div class="wpb_column vc_column_container vc_col-sm-12 margin-bottom-40">
+<div class="wpb_column vc_column_container vc_col-sm-12 margin-top-40">
     <div class="pho-wallet-card margin-bottom-40" style="max-width: 360px; border-radius: 16px; border: 1px solid #ccc; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-family: sans-serif; margin-top: 40px;">
         <?php if ($logo): ?>
             <div style="text-align:center;">

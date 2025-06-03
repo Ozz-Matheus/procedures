@@ -122,6 +122,13 @@ label.required:after {
 
 /*====================*/
 /*====================*/
+.pho-wallet-card{
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*====================*/
+/*====================*/
 /* Colors */
 .inactive{
     color: red;

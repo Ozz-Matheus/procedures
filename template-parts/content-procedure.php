@@ -312,12 +312,6 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
 
     if(get_post_meta(get_the_ID(), 'Status', true) == 'member'):
 
-        $templateFooter = plugin_dir_path(__FILE__) . '../template-parts/extra/content-footer.php';
-
-        if (file_exists($templateFooter)) {
-            require_once $templateFooter;
-        }
-
         // Si aún no tiene foto, mostrar formulario
         if (!$foto_perfil):
         ?>
@@ -339,6 +333,11 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
 
         endif;
 
+        $templateFooter = plugin_dir_path(__FILE__) . '../template-parts/extra/content-footer.php';
+
+        if (file_exists($templateFooter)) {
+            require_once $templateFooter;
+        }
 
     endif;
 ?>
