@@ -89,6 +89,15 @@ function pho_fields_procedure() {
         'type' => 'title',
         'classes' => 'pho-send-notification',
     ));
+
+    $box->add_field(array(
+        'name' => '',
+        'desc' => '<div class="pho-alert-info">⚠️ Si el estado cambia a <strong>miembro del club</strong>, además de la notificación se le agregará el <strong>ROL</strong> en automático.</div>',
+        'id'   => 'pho_send_notification_note',
+        'type' => 'title',
+        'classes' => 'pho-send-notification',
+    ));
+
 }
 
 
