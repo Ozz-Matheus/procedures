@@ -83,6 +83,19 @@ function pho_fields_procedure() {
     ));
 
     $box->add_field(array(
+        'name' => esc_html__('FOTO DE PERFIL', 'cmb2'),
+        'desc' => esc_html__('El usuario puede subir su propia imagen.', 'cmb2'),
+        'id'   => 'Profile_Pic',
+        'type' => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'query_args' => array(
+            'type' => array('image/jpeg', 'image/png'),
+        ),
+    ));
+
+    $box->add_field(array(
         'name' => 'Enviar notificación',
         'desc' => esc_html__('Envia una notificación del estado por correo al usuario.', 'cmb2'),
         'id' => 'pho_send_notification',
