@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']
 ?>
 
 <div class="margin-bottom-40 underline">
-    <h1 class="margin-bottom-40">Trámites</h1>
+    <h2 class="margin-bottom-40">Trámites</h2>
 </div>
 
 <?php
@@ -315,9 +315,10 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
         // Si aún no tiene foto, mostrar formulario
         if (!$foto_perfil):
         ?>
+            <h3>Generar tu Credencial Digital</h3>
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="procedure_id" value="<?php echo esc_attr($procedure_id); ?>">
-                <label for="profile_pic"><strong>Sube tu foto para la credencial (PNG/JPG, cuadrada):</strong></label><br>
+                <label for="profile_pic"><strong>Sube tu foto (PNG/JPG, cuadrada):</strong></label><br>
                 <input type="file" name="profile_pic" id="profile_pic" accept="image/*" required><br><br>
                 <input type="submit" name="generate_credential" value="Generar Credencial" class="button">
             </form>
