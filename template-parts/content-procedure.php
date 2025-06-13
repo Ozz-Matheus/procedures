@@ -17,31 +17,6 @@ function agregar_prefijo_procedure($archivo, $prefijo = 'procedure-') {
     return false;
 }
 
-// Procesamiento anticipado para evitar headers already sent
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']) && isset($_FILES['profile_pic'])) {
-    $procedure_id = absint($_POST['procedure_id']);
-    $uploaded = $_FILES['profile_pic'];
-
-    if ($uploaded['error'] === UPLOAD_ERR_OK) {
-        require_once ABSPATH . 'wp-admin/includes/file.php';
-
-        $upload = agregar_prefijo_procedure($uploaded, 'profile-pic-');
-
-        if (!isset($upload['error'])) {
-            update_post_meta($procedure_id, 'Profile_Pic', esc_url_raw($upload['url']));
-            // Realizar una redirección después de mostrar el mensaje
-            $procedure_url = wc_get_account_endpoint_url('tramites');
-            echo '<script>
-                setTimeout(function(){
-                    window.location.href="' . esc_url($procedure_url) . '";
-                }, 2000); // 2000 milisegundos = 2 segundos
-            </script>';
-            exit;
-        } else {
-            $pho_upload_error = '⚠️ Error al subir la imagen: ' . esc_html($upload['error']);
-        }
-    }
-}
 ?>
 
 <div class="margin-bottom-40 underline">
@@ -66,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']
 
         $status_label = pho_get_all_statuses()[$status_slug]['label'] ?? ucfirst($status_slug);
 
-        $foto_perfil = get_post_meta($procedure_id, 'Profile_Pic', true);
+       // printf( '<pre>%s</pre>', var_export( get_post_custom( get_the_ID() ), true ) );
 ?> 
 
 <div class="margin-top-40 margin-bottom-40">
@@ -87,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']
         <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Names', true)); ?> </p>
     </div>
     <div class="col-12 col-md-4">
-        <h3>Teléfono</h3>
+        <h3>Teléfono con whatsapp</h3>
         <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Phone', true)); ?> </p>
     </div>
     <div class="col-12 col-md-4">
@@ -113,11 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_procedure'])) {
 
     // Actualiza los campos del Trámite
     $nombres = mb_strtoupper(sanitize_text_field($_POST['nombres']), 'UTF-8');
-    $telefono = sanitize_text_field($_POST['telefono']);
     $curp = strtoupper(sanitize_text_field($_POST['curp']));
     $rfc = strtoupper(sanitize_text_field($_POST['rfc']));
 
     // Manejo de archivos utilizando la nueva función
+
+    // Archivo FOTO de perfil
+    $upload_foto_de_perfil = isset($_FILES['profile_pic']) ? agregar_prefijo_procedure($_FILES['profile_pic']) : false;
+    if (!empty($upload_foto_de_perfil['url'])) {
+        update_post_meta($procedure_id, 'Profile_pic', $upload_foto_de_perfil['url']);
+    }
 
     // Archivo INE Frente
     $upload_ine_frente = isset($_FILES['ine_file_front']) ? agregar_prefijo_procedure($_FILES['ine_file_front']) : false;
@@ -156,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_procedure'])) {
     }
 
     update_post_meta($procedure_id, 'Names', $nombres);
-    update_post_meta($procedure_id, 'Phone', $telefono);
     update_post_meta($procedure_id, 'Curp', $curp);
     update_post_meta($procedure_id, 'Rfc', $rfc);
     update_post_meta($procedure_id, 'Observations', $observations);
@@ -175,8 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_procedure'])) {
 }
 
 // Obtiene los detalles del Trámite
+$foto_perfil_actual = get_post_meta($procedure_id, 'Profile_pic', true);
 $nombres_actual = get_post_meta($procedure_id, 'Names', true);
-$telefono_actual = get_post_meta($procedure_id, 'Phone', true);
 $ine_archivo_frente_actual = get_post_meta($procedure_id, 'Ine_file_front', true);
 $ine_archivo_respaldo_actual = get_post_meta($procedure_id, 'Ine_file_back', true);
 $curp_actual = get_post_meta($procedure_id, 'Curp', true);
@@ -189,10 +168,23 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
 <?php if(get_post_meta(get_the_ID(), 'Deactivate', true) == NULL): ?>
     <div class="margin-bottom-40 underline">
         <form method="post" enctype="multipart/form-data">
+            <?php if(!$foto_perfil_actual): ?>
+                <div class="margin-bottom-20">
+                    <h4> GENERAR TU CREDENCIAL DIGITAL: </h4>
+                    <label class="required" for="profile_pic"><strong> Sube tu foto (PNG/JPG, cuadrada):</strong></small>
+                    <input type="file" name="profile_pic" id="profile_pic" accept="image/*" required>
+                    <br>
+                    <strong>Agrega tu foto para Generar tu Credencial Digital.</strong>
+                </div>
+            <?php endif; ?>
+            <div class="margin-bottom-40">
+                <?php if($foto_perfil_actual): ?>
+                    <h4> FOTO PARA CREDENCIAL DIGITAL: </h4>
+                    <img class="img-small" src="<?php echo esc_url($foto_perfil_actual); ?>" alt="Vista de la foto de perfil">
+                <?php endif; ?>
+            </div>
             <label class="required" for="nombres"><strong>NOMBRE COMPLETO:</strong></label>
             <input class="margin-bottom-40" type="text" name="nombres" id="nombres" value="<?php echo esc_attr($nombres_actual); ?>" required>
-            <label for="telefono"><strong>TELÉFONO CON WHATSAPP:</strong></label>
-            <input class="margin-bottom-40" type="tel"  name="telefono" id="telefono" value="<?php echo esc_attr($telefono_actual); ?>" required>
             <label class="required"  for="ine"><strong>INE:</strong></label>
             <div class="margin-bottom-20"></div>
             <?php if(!$ine_archivo_frente_actual AND !$ine_archivo_respaldo_actual): ?>
@@ -313,18 +305,7 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
     if(get_post_meta(get_the_ID(), 'Status', true) == 'member'):
 
         // Si aún no tiene foto, mostrar formulario
-        if (!$foto_perfil):
-        ?>
-            <h3>Generar tu Credencial Digital</h3>
-            <form method="post" enctype="multipart/form-data">
-                <input type="hidden" name="procedure_id" value="<?php echo esc_attr($procedure_id); ?>">
-                <label for="profile_pic"><strong>Sube tu foto (PNG/JPG, cuadrada):</strong></label><br>
-                <input type="file" name="profile_pic" id="profile_pic" accept="image/*" required><br><br>
-                <input type="submit" name="generate_credential" value="Generar Credencial" class="button">
-            </form>
-        <?php
-
-        else:
+        if ($foto_perfil_actual):
 
             $credentialCard = plugin_dir_path(__FILE__) . '../template-parts/content-credential-card.php';
 

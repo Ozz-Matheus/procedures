@@ -24,8 +24,8 @@ function pho_process_new_tramite() {
         $user_email = sanitize_email($_POST['user_email']);
         $user_name = mb_strtoupper(sanitize_text_field($_POST['user_name']), 'UTF-8');
         $telefono = sanitize_text_field($_POST['telefono']);
-        $social = sanitize_text_field($_POST['social']);
-        $perfil = sanitize_text_field($_POST['perfil']);
+        // $social = sanitize_text_field($_POST['social']); // 📌
+        // $perfil = sanitize_text_field($_POST['perfil']); // 📌
 
         $default_status = 'incomplete';
 
@@ -40,8 +40,8 @@ function pho_process_new_tramite() {
             update_post_meta($procedure_id, 'Names', $user_name);
             update_post_meta($procedure_id, 'Status', $default_status);
             update_post_meta($procedure_id, 'Phone', $telefono);
-            update_post_meta($procedure_id, 'Social', $social);
-            update_post_meta($procedure_id, 'Perfil', $perfil);
+            // update_post_meta($procedure_id, 'Social', $social); // 📌
+            // update_post_meta($procedure_id, 'Perfil', $perfil); // 📌
 
             echo '<div class="alert alert-success"><span>A continuación carga tus documentos</span></div>';
 

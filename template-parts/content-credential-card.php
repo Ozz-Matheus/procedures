@@ -7,7 +7,7 @@ $user_id = $current_user->ID;
 
 // Metadatos del trámite actual
 $nombre = get_post_meta($procedure_id, 'Names', true);
-$foto = get_post_meta($procedure_id, 'Profile_Pic', true);
+$foto = get_post_meta($procedure_id, 'Profile_pic', true);
 $logo = get_option( 'woocommerce_email_header_image' );
 $qr_url = pho_generate_qr_image_url($user_id);
 $phone = get_post_meta($procedure_id, 'Phone', true);

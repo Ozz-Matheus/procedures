@@ -56,6 +56,7 @@ function pho_fields_procedure() {
     }
 
     $uploads = [
+        ['FOTO DE PERFIL', 'Profile_pic'],
         ['INE PARTE FRONTAL', 'Ine_file_front'],
         ['INE PARTE RESPALDO', 'Ine_file_back'],
         ['CURP', 'Curp_file'],
@@ -80,19 +81,6 @@ function pho_fields_procedure() {
         'id' => 'Observations',
         'type' => 'wysiwyg',
         'options' => array('wpautop' => true),
-    ));
-
-    $box->add_field(array(
-        'name' => esc_html__('FOTO DE PERFIL', 'cmb2'),
-        'desc' => esc_html__('El usuario puede subir su propia imagen.', 'cmb2'),
-        'id'   => 'Profile_Pic',
-        'type' => 'file',
-        'options' => array(
-            'url' => false,
-        ),
-        'query_args' => array(
-            'type' => array('image/jpeg', 'image/png'),
-        ),
     ));
 
     $box->add_field(array(
