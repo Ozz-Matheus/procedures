@@ -17,6 +17,32 @@ function agregar_prefijo_procedure($archivo, $prefijo = 'procedure-') {
     return false;
 }
 
+// Procesamiento anticipado para evitar headers already sent
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']) && isset($_FILES['profile_pic'])) {
+    $procedure_id = absint($_POST['procedure_id']);
+    $uploaded = $_FILES['profile_pic'];
+
+    if ($uploaded['error'] === UPLOAD_ERR_OK) {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+
+        $upload = agregar_prefijo_procedure($uploaded, 'profile-pic-');
+
+        if (!isset($upload['error'])) {
+            update_post_meta($procedure_id, 'Profile_pic', esc_url_raw($upload['url']));
+            // Realizar una redirección después de mostrar el mensaje
+            $procedure_url = wc_get_account_endpoint_url('tramites');
+            echo '<script>
+                setTimeout(function(){
+                    window.location.href="' . esc_url($procedure_url) . '";
+                }, 2000); // 2000 milisegundos = 2 segundos
+            </script>';
+            exit;
+        } else {
+            $pho_upload_error = '⚠️ Error al subir la imagen: ' . esc_html($upload['error']);
+        }
+    }
+}
+
 ?>
 
 <div class="margin-bottom-40 underline">
@@ -305,7 +331,18 @@ $autorizacion_archivo_actual = get_post_meta($procedure_id, 'Authorization', tru
     if(get_post_meta(get_the_ID(), 'Status', true) == 'member'):
 
         // Si aún no tiene foto, mostrar formulario
-        if ($foto_perfil_actual):
+        if (!$foto_perfil_actual):
+        ?>
+            <h3>Generar tu Credencial Digital</h3>
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="procedure_id" value="<?php echo esc_attr($procedure_id); ?>">
+                <label for="profile_pic"><strong>Sube tu foto (PNG/JPG, cuadrada):</strong></label><br>
+                <input type="file" name="profile_pic" id="profile_pic" accept="image/*" required><br><br>
+                <input type="submit" name="generate_credential" value="Generar Credencial" class="button">
+            </form>
+        <?php
+
+        else:
 
             $credentialCard = plugin_dir_path(__FILE__) . '../template-parts/content-credential-card.php';
 
