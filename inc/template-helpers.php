@@ -29,8 +29,19 @@ function pho_get_qr_url() {
 }
 
 // Devuelve imagen QR (usando Google Chart API)
-function pho_generate_qr_image_url($user_id) {
-    return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode(pho_get_qr_url());
+function pho_generate_qr_image_url($procedure_id) {
+
+    $nombre = get_post_meta($procedure_id, 'Names', true);
+    $telefono = get_post_meta($procedure_id, 'Phone', true);
+
+    $numero_empresa = get_option('pho_whatsapp_number', '5215555555555');
+
+
+    $mensaje = "Hola,\n$nombre — Número $telefono — me invitó a unirme al Club de Thulio para que ambos recibamos prerrolados de cortesía.\n¿Podrían indicarme los pasos para completar mi afiliación, por favor?\n¡Gracias! 🌿";
+
+    $url = "https://wa.me/$numero_empresa?text=" . urlencode($mensaje);
+
+    return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($url);
 }
 
 // Devuelve la fecha de publicación del trámite

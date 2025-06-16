@@ -27,8 +27,8 @@ function pho_render_credential_settings_page() {
                     <td><input type="text" name="pho_member_prefix" value="<?php echo esc_attr(get_option('pho_member_prefix', 'PHO')); ?>" /></td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">URL base del QR</th>
-                    <td><input type="url" name="pho_qr_url_base" value="<?php echo esc_attr(get_option('pho_qr_url_base', 'https://phoenixdev.mx/') ); ?>" /></td>
+                    <th scope="row">Número de WhatsApp</th>
+                    <td><input type="tel" name="pho_whatsapp_number" value="<?php echo esc_attr(get_option('pho_whatsapp_number', '5215555555555')); ?>" /></td>
                 </tr>
             </table>
             <?php submit_button(); ?>
@@ -40,5 +40,5 @@ function pho_render_credential_settings_page() {
 // Registrar ajustes
 add_action('admin_init', function () {
     register_setting('pho_credential_settings', 'pho_member_prefix');
-    register_setting('pho_credential_settings', 'pho_qr_url_base');
+    register_setting('pho_credential_settings', 'pho_whatsapp_number');
 });
