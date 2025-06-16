@@ -11,9 +11,12 @@ $foto = get_post_meta($procedure_id, 'Profile_pic', true);
 $logo = get_option( 'woocommerce_email_header_image' );
 $qr_url = pho_generate_qr_image_url($procedure_id);
 $phone = get_post_meta($procedure_id, 'Phone', true);
-$member_number = pho_get_member_number_from_phone($user_id, $phone);
+$get_member_number = pho_get_member_number_from_phone($user_id, $phone);
 $fecha_afiliacion = pho_get_affiliation_date($procedure_id);
-
+$member_number = get_post_meta($procedure_id, 'Member_Number', true);
+if (empty($member_number)) {
+    update_post_meta($procedure_id, 'Member_Number', $get_member_number);
+}
 ?>
 <div class="wpb_column vc_column_container vc_col-sm-12 margin-top-40">
     <div class="pho-wallet-card margin-bottom-40" style="max-width: 360px; border-radius: 16px; border: 1px solid #ccc; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-family: sans-serif; margin-top: 40px;     background-color: #ffffff;">

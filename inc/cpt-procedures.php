@@ -23,6 +23,10 @@ add_action('init', 'pho_register_custom_post_type_procedures');
 
 function pho_add_procedure_status_column($columns) {
     $columns['procedure_name'] = __('Nombre Completo', 'pho-procedures');
+    $columns['procedure_number'] = __('Número de Miembro', 'pho-procedures');
+    $columns['procedure_phone'] = __('Whatsapp', 'pho-procedures');
+    $columns['procedure_curp'] = __('CURP o Pasaporte', 'pho-procedures');
+    $columns['procedure_rfc'] = __('RFC', 'pho-procedures');
     $columns['procedure_status'] = __('Estado del Trámite', 'pho-procedures');
     return $columns;
 }
@@ -33,6 +37,26 @@ function pho_display_procedure_status_column($column, $post_id) {
     if ($column === 'procedure_name') {
 
         echo esc_html(get_post_meta($post_id, 'Names', true));
+    }
+
+    if ($column === 'procedure_number') {
+
+        echo esc_html(get_post_meta($post_id, 'Member_Number', true));
+    }
+
+    if ($column === 'procedure_phone') {
+
+        echo esc_html(get_post_meta($post_id, 'Phone', true));
+    }
+
+    if ($column === 'procedure_curp') {
+
+        echo esc_html(get_post_meta($post_id, 'Curp', true));
+    }
+
+    if ($column === 'procedure_rfc') {
+
+        echo esc_html(get_post_meta($post_id, 'Rfc', true));
     }
 
     if ($column === 'procedure_status') {

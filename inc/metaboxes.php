@@ -37,6 +37,16 @@ function pho_fields_procedure() {
 
     ));
 
+    $box->add_field(array(
+        'name' => esc_html__('NÚMERO DE MIEMBRO', 'cmb2'),
+        'desc' => esc_html__('Número generado automáticamente.', 'cmb2'),
+        'id' => 'Member_Number',
+        'type' => 'text',
+        'attributes' => array(
+            'readonly' => 'readonly',
+        ),
+    ));
+
     $fields = [
         ['NOMBRES', 'Nombre completo acá.', 'Names'],
         ['TELÉFONO', 'Teléfono de WhatsApp.', 'Phone'],
