@@ -1,12 +1,23 @@
 /*====================*/
-.pho-alert-info {
-    background-color: #fff3cd;
-    color: #856404;
+.pho-alert{
     padding: 10px 15px;
-    border-left: 5px solid #ffeeba;
     margin-top: 10px;
     margin-bottom: 20px;
     font-size: 14px;
     border-radius: 4px;
+}
+/*====================*/
+/*====================*/
+.pho-alert-info {
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 5px solid #ffeeba;
+}
+/*====================*/
+/*====================*/
+.pho-alert-error{
+    background-color: #f8d7da;
+    color: #58151c;
+    border-left: 5px solid #f8d4d7;
 }
 /*====================*/

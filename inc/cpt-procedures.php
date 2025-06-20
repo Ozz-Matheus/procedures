@@ -16,7 +16,16 @@ function pho_register_custom_post_type_procedures() {
             'edit_item' => 'Editar Trámite',
             'view_item' => 'Ver Trámite'
         ),
-        'capability_type' => 'post'
+        'capabilities' => array(
+            'edit_post'           => 'edit_procedure',
+            'read_post'           => 'read_procedure',
+            'delete_post'         => 'delete_procedure',
+            'edit_posts'          => 'edit_procedures',
+            'edit_others_posts'   => 'edit_others_procedures',
+            'publish_posts'       => 'publish_procedures',
+            'read_private_posts'  => 'read_private_procedures',
+        ),
+        'map_meta_cap' => true,
     ));
 }
 add_action('init', 'pho_register_custom_post_type_procedures');

@@ -21,17 +21,9 @@ add_filter('wp_mail_from_name', 'pho_change_mail_from_name');
 function pho_send_email_notification() {
     if (isset($_POST['user_email'])) {
         $email = sanitize_email($_POST['user_email']);
-        $email_state_slug = sanitize_text_field($_POST['procedure_status']);
         $email_state_label = sanitize_text_field($_POST['procedure_status_label']);
-
-        if ($email_state_slug === 'member') {
-            $user = get_user_by('email', $email);
-            if ($user && !in_array('club_member', (array) $user->roles)) {
-                $user->add_role('club_member');
-            }
-        }
-
         $email_observations = wp_kses_post($_POST['procedure_observations']);
+
         $subject = 'Estado del Trámite : ' . $email_state_label;
         $template_path = plugin_dir_path(__FILE__) . '../notification-procedures.php';
 

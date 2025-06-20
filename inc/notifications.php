@@ -19,6 +19,7 @@ function pho_enqueue_admin_notification_script($hook) {
 
         wp_localize_script('pho-admin-notification', 'phoNotificationData', array(
             'ajax_url' => admin_url('admin-ajax.php'),
+            'procedure_id' => $post->ID,
             'user_email' => get_the_title($post->ID),
             'procedure_status_slug' => $procedure_status_slug,
             'procedure_status_label' => $procedure_status_label,
