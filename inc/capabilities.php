@@ -54,8 +54,16 @@ function pho_add_club_member_role() {
         wp_send_json_error('Usuario no encontrado.');
     }
 
-    if (!in_array('club_member', (array) $user->roles)) {
+    if (in_array('club_member', (array) $user->roles)) {
+        $user->remove_role('club_member');
+        delete_post_meta($procedure_id, 'Member_Number');
+        wp_send_json_success('❌ Rol eliminado y número de miembro eliminado.');
+    } else {
         $user->add_role('club_member');
+        $telefono = get_post_meta($procedure_id, 'Phone', true);
+        $member_number = pho_get_member_number_from_phone($user->ID, $telefono);
+        update_post_meta($procedure_id, 'Member_Number', $member_number);
+        wp_send_json_success('✅ Rol agregado y número de miembro asignado.');
     }
 
     $telefono = get_post_meta($procedure_id, 'Phone', true);

@@ -43,6 +43,7 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 alert(response.data);
+                location.reload();
             },
             error: function (error) {
                 console.log(error);
