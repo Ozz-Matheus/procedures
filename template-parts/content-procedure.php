@@ -67,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']
 
         $status_label = pho_get_all_statuses()[$status_slug]['label'] ?? ucfirst($status_slug);
 
-       // printf( '<pre>%s</pre>', var_export( get_post_custom( get_the_ID() ), true ) );
 ?> 
 
 <div class="margin-top-40 margin-bottom-40">
