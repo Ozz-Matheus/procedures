@@ -1,39 +1,61 @@
 <?php
+/**
+ * Capabilities y Roles personalizados para PHO Procedures
+ */
 
-function pho_add_custom_capabilities_for_non_admins() {
-    $roles = array('author', 'editor');
+// Asegurar rol 'club_member'
+function pho_register_club_member_role() {
+    $role = get_role('club_member');
+
+    if (!$role) {
+        add_role(
+            'club_member',
+            __('Miembro del Club', 'pho-procedures'),
+            [
+                'read' => true,
+                'publish_posts' => false,
+                'edit_posts' => false,
+            ]
+        );
+    } else {
+        $role->add_cap('read');
+        $role->remove_cap('publish_posts');
+        $role->remove_cap('edit_posts');
+    }
+}
+add_action('init', 'pho_register_club_member_role');
+
+// Otorgar capacidades del CPT 'procedures' solo a admin y shop manager
+function pho_grant_procedure_caps_to_admins_and_managers() {
+    $roles = ['administrator', 'shop_manager'];
+    $caps = [
+        'edit_procedure',
+        'read_procedure',
+        'delete_procedure',
+        'edit_procedures',
+        'edit_others_procedures',
+        'publish_procedures',
+        'read_private_procedures',
+    ];
 
     foreach ($roles as $role_name) {
         $role = get_role($role_name);
         if ($role) {
-            $role->add_cap('publish_posts');
-            $role->add_cap('read');
+            foreach ($caps as $cap) {
+                $role->add_cap($cap);
+            }
         }
     }
-
-    // Asegurar que el rol 'club_member' existe
-    if (!get_role('club_member')) {
-        add_role(
-            'club_member',
-            __('Miembro del Club', 'pho-procedures'),
-            array(
-                'read' => true,
-                'publish_posts' => false,
-                'edit_posts' => false,
-            )
-        );
-    }
 }
-add_action('init', 'pho_add_custom_capabilities_for_non_admins');
+add_action('init', 'pho_grant_procedure_caps_to_admins_and_managers');
 
+// Acción AJAX para asignar/remover el rol club_member
 function pho_add_club_member_role() {
-
-    if (!current_user_can('manage_options')) {
+    if (!current_user_can('manage_woocommerce')) {
         wp_send_json_error('Sin permisos suficientes.');
     }
 
     $procedure_id = absint($_POST['procedure_id'] ?? 0);
-
     $user_email = sanitize_email($_POST['user_email'] ?? '');
     $procedureStatus = sanitize_text_field($_POST['procedure_status'] ?? '');
 
@@ -49,7 +71,6 @@ function pho_add_club_member_role() {
     }
 
     $user = get_user_by('email', $user_email);
-
     if (!$user) {
         wp_send_json_error('Usuario no encontrado.');
     }
@@ -65,12 +86,5 @@ function pho_add_club_member_role() {
         update_post_meta($procedure_id, 'Member_Number', $member_number);
         wp_send_json_success('✅ Rol agregado y número de miembro asignado.');
     }
-
-    $telefono = get_post_meta($procedure_id, 'Phone', true);
-    $member_number = pho_get_member_number_from_phone($user->ID, $telefono);
-    update_post_meta($procedure_id, 'Member_Number', $member_number);
-
-    wp_send_json_success('✅ Rol de Miembro del club y número de miembro asignado.');
 }
 add_action('wp_ajax_pho_add_club_member_role', 'pho_add_club_member_role');
-
