@@ -5,7 +5,7 @@ function pho_enqueue_assets() {
         'pho-procedures-plugin',
         plugin_dir_url(__FILE__) . '../inc/css/pho-procedures-style.css',
         array(),
-        '1.6'
+        '1.8'
     );
 }
 add_action('wp_enqueue_scripts', 'pho_enqueue_assets');
@@ -20,7 +20,7 @@ function pho_enqueue_admin_assets($hook) {
                 'pho-admin-style',
                 plugin_dir_url(__FILE__) . '../inc/css/pho-admin-style.css',
                 array(),
-                '1.0'
+                '1.2'
             );
         }
     }

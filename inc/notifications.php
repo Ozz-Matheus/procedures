@@ -13,7 +13,7 @@ function pho_enqueue_admin_notification_script($hook) {
             'pho-admin-notification',
             plugin_dir_url(__FILE__) . '../inc/js/admin-notification.js',
             array('jquery'),
-            '1.0',
+            '1.2',
             true
         );
 
