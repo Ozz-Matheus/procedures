@@ -14,7 +14,7 @@
                 <h3 class="h4">Participa en nuestro grupo de :</h3>
             </div>
             <div class="margin-top-20 margin-bottom-40">
-                <a class="button" download href="https://chat.whatsapp.com/Esgb4L5rus33n1yfWXCWKZ">
+                <a class="button" download href="https://chat.whatsapp.com/Esgb4L5rus33n1yfWXCWKZ" target="_blank">
                     WhatsApp  <i class="fab fa-whatsapp"></i>
                 </a>
             </div>

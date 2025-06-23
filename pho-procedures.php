@@ -25,14 +25,14 @@ function pho_tramites_init_plugin() {
 
     $inc_path = plugin_dir_path(__FILE__) . 'inc/';
 
-    require_once $inc_path . 'assets.php';
-    require_once $inc_path . 'cmb2-loader.php';
-    require_once $inc_path . 'forms.php';
-    require_once $inc_path . 'email.php';
-    require_once $inc_path . 'metaboxes.php';
-    require_once $inc_path . 'notifications.php';
-    require_once $inc_path . 'redirects.php';
-    require_once $inc_path . 'admin-statuses.php';
-    require_once $inc_path . 'settings.php';
-    require_once $inc_path . 'template-helpers.php';
+    require_once $inc_path . 'cmb2-loader.php';        // Primero la librería base
+    require_once $inc_path . 'template-helpers.php';   // Funciones auxiliares usadas en muchos módulos
+    require_once $inc_path . 'assets.php';             // CSS/JS, puede depender de helpers
+    require_once $inc_path . 'forms.php';              // Lógica de formulario
+    require_once $inc_path . 'email.php';              // Envío de correos
+    require_once $inc_path . 'metaboxes.php';          // CMB2: campos personalizados
+    require_once $inc_path . 'notifications.php';      // Notificaciones JS en admin
+    require_once $inc_path . 'redirects.php';          // Redirección single
+    require_once $inc_path . 'admin-statuses.php';     // Estados de trámite
+    require_once $inc_path . 'settings.php';           // Configuración de credencial
 }
