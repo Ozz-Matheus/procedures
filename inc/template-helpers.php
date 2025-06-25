@@ -37,7 +37,7 @@ function pho_generate_qr_image_url($procedure_id) {
     $numero_empresa = get_option('pho_whatsapp_number', '5215555555555');
 
 
-    $mensaje = "Hola,\n$nombre — Número $telefono — me invitó a unirme al Club de Thulio para que ambos recibamos prerrolados de cortesía.\n¿Podrían indicarme los pasos para completar mi afiliación, por favor?\n¡Gracias! 🌿";
+    $mensaje = "Hola,\n$nombre — Número $telefono — me invitó a unirme al Club de Thulio para que ambos recibamos pre rolados de cortesía.\n¿Podrían indicarme los pasos para completar mi afiliación, por favor?\n¡Gracias! 🌿";
 
     $url = "https://wa.me/$numero_empresa?text=" . urlencode($mensaje);
 
