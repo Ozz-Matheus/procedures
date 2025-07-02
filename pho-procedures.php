@@ -29,6 +29,7 @@ function pho_tramites_init_plugin() {
     require_once $inc_path . 'template-helpers.php';   // Funciones auxiliares usadas en muchos módulos
     require_once $inc_path . 'assets.php';             // CSS/JS, puede depender de helpers
     require_once $inc_path . 'forms.php';              // Lógica de formulario
+    require_once $inc_path . 'save-hooks.php';         // Hook para asignar autor correcto
     require_once $inc_path . 'email.php';              // Envío de correos
     require_once $inc_path . 'metaboxes.php';          // CMB2: campos personalizados
     require_once $inc_path . 'notifications.php';      // Notificaciones JS en admin
