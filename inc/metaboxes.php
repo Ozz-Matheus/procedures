@@ -47,9 +47,18 @@ function pho_fields_procedure() {
         ),
     ));
 
+    $box->add_field(array(
+        'name' => esc_html__('TELÉFONO', 'cmb2'),
+        'desc' => esc_html__('Teléfono de WhatsApp.', 'cmb2'),
+        'id' => 'Phone',
+        'type' => 'text',
+        'attributes' => array(
+            'required' => 'required'
+        ),
+    ));
+
     $fields = [
         ['NOMBRES', 'Nombre completo acá.', 'Names'],
-        ['TELÉFONO', 'Teléfono de WhatsApp.', 'Phone'],
         ['CURP', 'Clave Única de Registro de Población', 'Curp'],
         ['RFC', 'Registro Federal de Contribuyentes', 'Rfc'],
         ['RED SOCIAL', 'Red social', 'Social'],
