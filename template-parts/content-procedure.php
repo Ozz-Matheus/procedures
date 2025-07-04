@@ -69,41 +69,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']
 
 ?> 
 
-<div class="margin-top-40 margin-bottom-40">
-    <h2 class="h4"><?php esc_html_e(get_post_meta(get_the_ID(), 'Names', true)); ?></h2>
-</div>
+<?php if(get_post_meta(get_the_ID(), 'Deactivate', true) == NULL): ?>
 
-<div class="box row margin-bottom-40 underline">
-    <div class="col-12 col-md-4">
-        <h3><?php show_status_procedure($status_slug); ?> | Estado</h3>
-        <p><?php echo esc_html($status_label); ?></p>
+    <div class="margin-top-40 margin-bottom-40">
+        <h2 class="h4"><?php esc_html_e(get_post_meta(get_the_ID(), 'Names', true)); ?></h2>
     </div>
-    <div class="col-12 col-md-4">
-        <h3>Correo Electrónico</h3>
-        <p> <?php the_title(); ?> </p>
+
+    <div class="box row margin-bottom-40 underline">
+        <div class="col-12 col-md-4">
+            <h3><?php show_status_procedure($status_slug); ?> | Estado</h3>
+            <p><?php echo esc_html($status_label); ?></p>
+        </div>
+        <div class="col-12 col-md-4">
+            <h3>Correo Electrónico</h3>
+            <p> <?php the_title(); ?> </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <h3>Nombre Completo</h3>
+            <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Names', true)); ?> </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <h3>Teléfono con whatsapp</h3>
+            <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Phone', true)); ?> </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <h3>CURP</h3>
+            <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Curp', true)); ?> </p>
+        </div>
+        <div class="col-12 col-md-4">
+            <h3>RFC</h3>
+            <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Rfc', true)); ?> </p>
+        </div>
+        <div class="col-12">
+            <h3>Observaciones</h3>
+            <p> <?php echo wpautop( get_post_meta(get_the_ID(), 'Observations', true) ); ?> </p>
+        </div>
     </div>
-    <div class="col-12 col-md-4">
-        <h3>Nombre Completo</h3>
-        <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Names', true)); ?> </p>
-    </div>
-    <div class="col-12 col-md-4">
-        <h3>Teléfono con whatsapp</h3>
-        <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Phone', true)); ?> </p>
-    </div>
-    <div class="col-12 col-md-4">
-        <h3>CURP</h3>
-        <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Curp', true)); ?> </p>
-    </div>
-    <div class="col-12 col-md-4">
-        <h3>RFC</h3>
-        <p> <?php esc_html_e(get_post_meta(get_the_ID(), 'Rfc', true)); ?> </p>
-    </div>
-    <div class="col-12">
-        <h3>Observaciones</h3>
-        <p> <?php echo wpautop( get_post_meta(get_the_ID(), 'Observations', true) ); ?> </p>
-    </div>
-</div>
-   
+
+<?php endif; ?>
+
 <?php
 
 // Verifica si se ha enviado el formulario
