@@ -2,7 +2,7 @@
 
 function pho_add_custom_tab_to_my_account($tabs) {
     unset($tabs['downloads']);
-    $tabs['tramites'] = __('Mis Trámites', 'pho-procedures');
+    $tabs['tramites'] = __('Mi Club', 'pho-procedures');
     return $tabs;
 }
 add_filter('woocommerce_account_menu_items', 'pho_add_custom_tab_to_my_account');

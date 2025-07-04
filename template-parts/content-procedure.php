@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate_credential']
 ?>
 
 <div class="margin-bottom-40 underline">
-    <h2 class="margin-bottom-40">Trámites</h2>
+    <h2 class="margin-bottom-40">Membresía</h2>
 </div>
 
 <?php
